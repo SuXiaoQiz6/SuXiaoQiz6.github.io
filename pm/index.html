@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050505" />
+  <title>产品笔记 · 工程师小杨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Great+Vibes&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@500;600&family=Outfit:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="pm.css" />
+</head>
+<body class="page-pm">
+  <div class="fx" aria-hidden="true">
+    <div class="fx-aurora"></div>
+    <div class="fx-grid"></div>
+    <div class="fx-noise"></div>
+    <div class="fx-vignette"></div>
+    <div class="fx-spotlight"></div>
+  </div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="logo" href="../">工程师小杨</a>
+    <p class="nav-meta">
+      <a href="../">返回首页</a>
+    </p>
+  </header>
+
+  <main class="wrap pm">
+    <section class="intro">
+      <p class="eyebrow">Product Notes</p>
+      <h1>产品笔记</h1>
+      <p>记录怎么把需求收成可做的范围：先想清楚给谁用、不做什么、错了怎么办。下面是目前整理好的一条完整案例。</p>
+    </section>
+
+    <article class="work" id="videohub">
+      <div class="work-head">
+        <div class="work-kicker">
+          <span>01</span>
+          <span>独立原型</span>
+          <span>Vibe Coding</span>
+        </div>
+        <h2>VideoHub</h2>
+        <p class="work-lede">把 B 站、抖音、YouTube 的公开链接，收成一条本机链路：解析 → 预览 → 保存到本地。</p>
+      </div>
+
+      <dl class="work-facts">
+        <div>
+          <dt>角色</dt>
+          <dd>自己写 PRD 并落地</dd>
+        </div>
+        <div>
+          <dt>形态</dt>
+          <dd>本机网页原型</dd>
+        </div>
+        <div>
+          <dt>范围</dt>
+          <dd>只做能跑通的 P0</dd>
+        </div>
+        <div>
+          <dt>材料</dt>
+          <dd><a href="https://github.com/SuXiaoQiz6/videohub_local" target="_blank" rel="noopener">GitHub 仓库</a></dd>
+        </div>
+      </dl>
+
+      <div class="work-split">
+        <section>
+          <h3>问题</h3>
+          <p>想把公开课或收藏视频存到本地时，各平台入口不统一：有的没有下载，有的缓存格式难用，合集还要一条条处理。</p>
+          <p>目标用户很具体：在 B 站 / 抖音 / YouTube 看到一套课程，只想勾选其中几集，离线看。</p>
+        </section>
+        <section>
+          <h3>产品目标</h3>
+          <p>第一版只回答三件事：链接能否解析、文件能否保存、合集能否勾选后批量下载。</p>
+          <p>网页端先做完；付费视频、去水印、会员体系都放到后面。</p>
+        </section>
+      </div>
+
+      <section class="work-block">
+        <h3>关键决策</h3>
+        <p class="work-note">作品集里真正要看的，是做了什么、以及明确不做的。</p>
+        <ol class="decision-list">
+          <li>
+            <strong>下载交给浏览器下载栏</strong>
+            <span>不自建应用内任务队列。第一版先保证「能保存」，状态机留到 P1。</span>
+          </li>
+          <li>
+            <strong>预览和下载拆开</strong>
+            <span>预览走代理流，下载走附件。预览失败时仍应能下；返回首页只取消预览，不断已开始的下载。</span>
+          </li>
+          <li>
+            <strong>不把导 Cookie 做成产品步骤</strong>
+            <span>B 站公开视频尽量免登录。未登录清晰度常见上限约 720p，更高档位不承诺。</span>
+          </li>
+          <li>
+            <strong>合集至少保留一条勾选</strong>
+            <span>取消全选时，回到「当前正在看的那一集」，不允许全部空选。查看详情不改已选项。</span>
+          </li>
+          <li>
+            <strong>首页不放 X 入口</strong>
+            <span>后端仍能解析公开原生视频，但演示入口不放，避免面试时被无关内容带偏。</span>
+          </li>
+          <li>
+            <strong>改一个平台，不能打挂另一个</strong>
+            <span>B 站 / 抖音 / YouTube 解析路径隔离。这是 vibe coding 时最容易翻车的地方，所以写进红线。</span>
+          </li>
+        </ol>
+      </section>
+
+      <div class="work-split">
+        <section>
+          <h3>这一版做了</h3>
+          <ul>
+            <li>粘贴链接解析：B 站、抖音短链、YouTube</li>
+            <li>浏览器里预览，再交给 Chrome / Edge / 夸克下载栏</li>
+            <li>合集分页、勾选、全选规则、多任务下载</li>
+            <li>先写 PRD 和阶段性补充需求，再按验收口径收口</li>
+          </ul>
+        </section>
+        <section>
+          <h3>明确没做</h3>
+          <ul>
+            <li>账号、Stripe、去水印</li>
+            <li>应用内下载队列和进度面板</li>
+            <li>登录后的高码率与音视频分轨合并</li>
+            <li>公网部署（解析必须有独立后端）</li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="work-block">
+        <h3>怎么验收</h3>
+        <ul class="plain-list">
+          <li>公开单稿：解析 → 预览 → 下载</li>
+          <li>合集：勾选 N 条，下载栏出现 N 个任务，文件名可用</li>
+          <li>返回首页：预览停，下载继续</li>
+          <li>刷新媒体页：还能回到当次解析结果</li>
+        </ul>
+      </section>
+
+      <section class="work-block">
+        <h3>局限</h3>
+        <p>这是个人 vibe coding 原型，给学习和面试演示用，不是上线产品。请只解析自己有权访问的公开内容，并遵守各平台条款。</p>
+        <p>没有真实用户量和留存数据。YouTube / X 受平台风控，失败是预期，不把它写成「登录 VideoHub」。</p>
+      </section>
+
+      <p class="work-cta">
+        <a class="text-link" href="https://github.com/SuXiaoQiz6/videohub_local" target="_blank" rel="noopener">查看仓库 →</a>
+      </p>
+    </article>
+
+    <article class="work is-compact" id="case-api">
+      <div class="work-head">
+        <div class="work-kicker">
+          <span>02</span>
+          <span>笔记</span>
+        </div>
+        <h2>企业采购大模型 API 时在选什么</h2>
+        <p class="work-lede">销售侧选型笔记。信息来自公开资料与顾问实践，不是厂商评测。</p>
+      </div>
+      <div class="work-split">
+        <section>
+          <h3>问题</h3>
+          <p>企业常说「要上大模型 / 要私有化」，真正卡住的是：场景成不成立、数据能不能出域、账单能不能控、效果能不能接受。</p>
+        </section>
+        <section>
+          <h3>做法</h3>
+          <p>先给结论，再用场景矩阵决定主推 / 备选 / 不推，并写清价格口径与客户顾虑。材料截图待补。</p>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer wrap">
+    <p><a href="../">← 返回首页</a></p>
+  </footer>
+
+  <script src="../site.js"></script>
+</body>
+</html>

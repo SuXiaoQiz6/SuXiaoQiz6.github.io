@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="工程师小杨的个人工作台。" />
+  <title>工程师小杨 · 工作台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Great+Vibes&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@500;600&family=Outfit:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-home">
+  <a class="skip" href="#entries">跳到内容入口</a>
+
+  <div class="fx" aria-hidden="true">
+    <div class="fx-aurora"></div>
+    <div class="fx-orb fx-orb-a"></div>
+    <div class="fx-orb fx-orb-b"></div>
+    <div class="fx-grid"></div>
+    <canvas class="fx-dust"></canvas>
+    <div class="fx-noise"></div>
+    <div class="fx-vignette"></div>
+    <div class="fx-spotlight"></div>
+  </div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="logo" href="./">工程师小杨</a>
+    <p class="nav-meta">
+      <span data-clock>Workstation</span>
+      <a href="mailto:YOUR_EMAIL@example.com">邮箱</a>
+      <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener">GitHub</a>
+    </p>
+  </header>
+
+  <main class="home">
+    <section class="hero">
+      <p class="eyebrow reveal">Workstation</p>
+      <h1 class="hero-name reveal delay-1">keep moving</h1>
+    </section>
+
+    <section class="entries" id="entries" aria-label="入口列表">
+      <a class="entry-card is-primary reveal delay-3" href="pm/">
+        <span class="entry-index">01</span>
+        <span class="entry-kicker">作品</span>
+        <h2>AI 产品经理作品集</h2>
+        <p>产品笔记与案例。</p>
+        <span class="entry-cta">进入<span class="arrow">→</span></span>
+      </a>
+
+      <div class="entry-card is-placeholder reveal delay-4" aria-disabled="true">
+        <span class="entry-index">02</span>
+        <span class="entry-kicker">笔记</span>
+        <h2>其他经历</h2>
+        <p>待补充</p>
+        <span class="entry-cta is-muted">待补充</span>
+      </div>
+    </section>
+  </main>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>慢慢来比较快</span><span>先动手</span><span>保持好奇</span><span>少说多做</span><span>允许空白</span><span>把问题写清楚</span><span>留一点余量</span><span>做完再优化</span>
+      <span>慢慢来比较快</span><span>先动手</span><span>保持好奇</span><span>少说多做</span><span>允许空白</span><span>把问题写清楚</span><span>留一点余量</span><span>做完再优化</span>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>个人工作台，持续更新。</p>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>
