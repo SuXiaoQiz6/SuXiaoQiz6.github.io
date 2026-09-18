@@ -32,7 +32,7 @@
     <section class="intro">
       <p class="eyebrow">Product Notes</p>
       <h1>产品笔记</h1>
-      <p>记录怎么把需求收成可做的范围：先想清楚给谁用、不做什么、错了怎么办。下面是目前整理好的一条完整案例。</p>
+      <p>从产品需求出发，分析用户场景与产品目标，设计产品功能与产品页面，vibe coding一步步纠正落地细节。</p>
     </section>
 
     <article class="work" id="videohub">
@@ -43,7 +43,7 @@
           <span>Vibe Coding</span>
         </div>
         <h2>VideoHub</h2>
-        <p class="work-lede">把 B 站、抖音、YouTube 的公开链接，收成一条本机链路：解析 → 预览 → 保存到本地。</p>
+        <p class="work-lede">把 B 站、抖音、YouTube 等音视频平台的公开媒体学习资源解析，提供给用户统一的资源预览与本地保存体验，方便用户提高学习效率。</p>
       </div>
 
       <dl class="work-facts">
@@ -52,12 +52,8 @@
           <dd>自己写 PRD 并落地</dd>
         </div>
         <div>
-          <dt>形态</dt>
+          <dt>产品形态</dt>
           <dd>本机网页原型</dd>
-        </div>
-        <div>
-          <dt>范围</dt>
-          <dd>只做能跑通的 P0</dd>
         </div>
         <div>
           <dt>材料</dt>
@@ -68,43 +64,81 @@
       <div class="work-split">
         <section>
           <h3>问题</h3>
-          <p>想把公开课或收藏视频存到本地时，各平台入口不统一：有的没有下载，有的缓存格式难用，合集还要一条条处理。</p>
-          <p>目标用户很具体：在 B 站 / 抖音 / YouTube 看到一套课程，只想勾选其中几集，离线看。</p>
+          <p>想把公开课或收藏视频存到本地时，各平台入口不统一：有的没有下载，有的缓存格式受平台约束，合集还要一条条处理。</p>
+          <p>目标用户很具体：在 B 站 / 抖音 / YouTube 看到一套课程，想缓存其中几集，离线观看。</p>
         </section>
         <section>
           <h3>产品目标</h3>
-          <p>第一版只回答三件事：链接能否解析、文件能否保存、合集能否勾选后批量下载。</p>
+          <p>第一版只做成三件事：链接能否解析、文件能否保存、合集能否勾选后批量下载。</p>
           <p>网页端先做完；付费视频、去水印、会员体系都放到后面。</p>
         </section>
       </div>
 
+      <section class="work-block shots" aria-label="产品运行">
+        <h3>产品运行</h3>
+        <p class="work-note">同一条课程链接走完三步。图按实际界面贴，点开可看原图。</p>
+        <ol class="shot-list">
+          <li>
+            <div class="shot-copy">
+              <span class="shot-step">01</span>
+              <h4>预览加载</h4>
+              <p>解析成功后先进入媒体页。预览还在拉时写明「正在加载」，标题、来源和合集已经在下面，不让页面空着。</p>
+            </div>
+            <figure class="shot-frame">
+              <a href="assets/videohub-loading.jpg" target="_blank" rel="noopener">
+                <img src="assets/videohub-loading.jpg" alt="VideoHub 媒体页正在加载预览，下方已显示 B 站课程标题与合集信息" />
+              </a>
+              <figcaption>先给状态，再给画面。</figcaption>
+            </figure>
+          </li>
+          <li>
+            <div class="shot-copy">
+              <span class="shot-step">02</span>
+              <h4>视频播放</h4>
+              <p>用浏览器原生播放器预览。清晰度、来源和时长跟在播放器下面，合集入口不挡正在看的这一集。</p>
+            </div>
+            <figure class="shot-frame">
+              <a href="assets/videohub-playback.jpg" target="_blank" rel="noopener">
+                <img src="assets/videohub-playback.jpg" alt="VideoHub 正在播放 B 站 Python 课程，画面下方有标题、播放量和时长" />
+              </a>
+              <figcaption>预览和下载是两条路。</figcaption>
+            </figure>
+          </li>
+          <li>
+            <div class="shot-copy">
+              <span class="shot-step">03</span>
+              <h4>多集下载</h4>
+              <p>勾选 P1、P2、P3 后，下载按钮显示数量。浏览器下载栏同时出现三个文件，而不是合成一个。</p>
+            </div>
+            <figure class="shot-frame">
+              <a href="assets/videohub-download.jpg" target="_blank" rel="noopener">
+                <img src="assets/videohub-download.jpg" alt="VideoHub 勾选三集后，浏览器下载栏同时保存三个 mp4 文件" />
+              </a>
+              <figcaption>选几条，就出现几个下载任务。</figcaption>
+            </figure>
+          </li>
+        </ol>
+      </section>
+
       <section class="work-block">
         <h3>关键决策</h3>
-        <p class="work-note">作品集里真正要看的，是做了什么、以及明确不做的。</p>
+        <p class="work-note">做了什么、以及明确不做的。</p>
         <ol class="decision-list">
           <li>
-            <strong>下载交给浏览器下载栏</strong>
-            <span>不自建应用内任务队列。第一版先保证「能保存」，状态机留到 P1。</span>
+            <strong>初版下载交给浏览器下载栏</strong>
+            <span>不自建任务队列。第一版优先保证「能下载保存」，状态机留到 P1。</span>
           </li>
           <li>
             <strong>预览和下载拆开</strong>
-            <span>预览走代理流，下载走附件。预览失败时仍应能下；返回首页只取消预览，不断已开始的下载。</span>
+            <span>预览走代理流，下载走附件。预览失败时仍应能下载；返回首页只取消预览，不会中断已开始的下载。</span>
           </li>
           <li>
-            <strong>不把导 Cookie 做成产品步骤</strong>
-            <span>B 站公开视频尽量免登录。未登录清晰度常见上限约 720p，更高档位不承诺。</span>
-          </li>
-          <li>
-            <strong>合集至少保留一条勾选</strong>
+            <strong>合集至少保留一条勾选逻辑</strong>
             <span>取消全选时，回到「当前正在看的那一集」，不允许全部空选。查看详情不改已选项。</span>
           </li>
           <li>
-            <strong>首页不放 X 入口</strong>
-            <span>后端仍能解析公开原生视频，但演示入口不放，避免面试时被无关内容带偏。</span>
-          </li>
-          <li>
-            <strong>改一个平台，不能打挂另一个</strong>
-            <span>B 站 / 抖音 / YouTube 解析路径隔离。这是 vibe coding 时最容易翻车的地方，所以写进红线。</span>
+            <strong>各平台解析任务隔离</strong>
+            <span>基于产品主要目标，以及不同平台的视频类型和用户目的，隔离不同平台的解析与下载任务，提高效率。</span>
           </li>
         </ol>
       </section>
@@ -113,19 +147,19 @@
         <section>
           <h3>这一版做了</h3>
           <ul>
-            <li>粘贴链接解析：B 站、抖音短链、YouTube</li>
-            <li>浏览器里预览，再交给 Chrome / Edge / 夸克下载栏</li>
-            <li>合集分页、勾选、全选规则、多任务下载</li>
-            <li>先写 PRD 和阶段性补充需求，再按验收口径收口</li>
+            <li>粘贴链接解析：B 站、抖音分享短链、YouTube、X</li>
+            <li>预览视频，再交给 Chrome / Edge / 夸克下载栏</li>
+            <li>合集分页、勾选、全选规则、合集视频下载</li>
+            <li>先写 PRD ，再按验收标准监督AI作业</li>
           </ul>
         </section>
         <section>
-          <h3>明确没做</h3>
+          <h3>后续补充</h3>
           <ul>
-            <li>账号、Stripe、去水印</li>
+            <li>账号、Stripe体系、去水印</li>
             <li>应用内下载队列和进度面板</li>
             <li>登录后的高码率与音视频分轨合并</li>
-            <li>公网部署（解析必须有独立后端）</li>
+            <li>公网部署</li>
           </ul>
         </section>
       </div>
@@ -133,17 +167,16 @@
       <section class="work-block">
         <h3>怎么验收</h3>
         <ul class="plain-list">
-          <li>公开单稿：解析 → 预览 → 下载</li>
-          <li>合集：勾选 N 条，下载栏出现 N 个任务，文件名可用</li>
+          <li>单个视频：解析 → 预览 → 下载</li>
+          <li>合集：勾选 N 条，下载栏出现 N 个任务供用户确定保存路径后下载</li>
           <li>返回首页：预览停，下载继续</li>
-          <li>刷新媒体页：还能回到当次解析结果</li>
+          <li>刷新媒体页：预览效果重新加载</li>
         </ul>
       </section>
 
       <section class="work-block">
         <h3>局限</h3>
-        <p>这是个人 vibe coding 原型，给学习和面试演示用，不是上线产品。请只解析自己有权访问的公开内容，并遵守各平台条款。</p>
-        <p>没有真实用户量和留存数据。YouTube / X 受平台风控，失败是预期，不把它写成「登录 VideoHub」。</p>
+        <p>这是个人 vibe coding 原型，目前仅支持本地clone项目运行，不是上线产品。另外该工具仅供个人学习使用，请只解析自己有权访问的公开内容，并遵守各平台条款。</p>
       </section>
 
       <p class="work-cta">
