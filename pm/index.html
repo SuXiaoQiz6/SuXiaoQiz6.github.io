@@ -184,25 +184,117 @@
       </p>
     </article>
 
-    <article class="work is-compact" id="case-api">
+    <article class="work" id="knowledgehub">
       <div class="work-head">
         <div class="work-kicker">
           <span>02</span>
-          <span>笔记</span>
+          <span>独立原型</span>
+          <span>RAG · Vibe Coding</span>
         </div>
-        <h2>企业采购大模型 API 时在选什么</h2>
-        <p class="work-lede">销售侧选型笔记。信息来自公开资料与顾问实践，不是厂商评测。</p>
+        <h2>KnowledgeHub</h2>
+        <p class="work-lede">面向虚构机加工企业「北湾机电」的本地知识库问答：管理员管理已发布知识库文档，员工可按照权限提问，回答要么带可追溯引用，要么明确标成「非制度依据」。</p>
       </div>
+
+      <dl class="work-facts">
+        <div>
+          <dt>角色</dt>
+          <dd>自己定义场景与边界并落地</dd>
+        </div>
+        <div>
+          <dt>产品形态</dt>
+          <dd>本地前后端原型</dd>
+        </div>
+        <div>
+          <dt>场景设定</dt>
+          <dd>制造业工厂包含制度 / 安全 / 质量 / 设备四类知识库</dd>
+        </div>
+        <div>
+          <dt>材料</dt>
+          <dd>本地仓库 · 截图待补</dd>
+        </div>
+      </dl>
+
       <div class="work-split">
         <section>
           <h3>问题</h3>
-          <p>企业常说「要上大模型 / 要私有化」，真正卡住的是：场景成不成立、数据能不能出域、账单能不能控、效果能不能接受。</p>
+          <p>制度、安全规范、质量文件分散在各处时，员工常靠口头打听。答错有代价，答不出来也要说清楚「这不是制度原文」。</p>
         </section>
         <section>
-          <h3>做法</h3>
-          <p>先给结论，再用场景矩阵决定主推 / 备选 / 不推，并写清价格口径与客户顾虑。材料截图待补。</p>
+          <h3>产品目标</h3>
+          <p>两条主流程：管理员上传并发布知识库文档并可通过普通员工测试账号测试问答效果；员工在有权限访问范围内提问，可看到正常命中回答，无命中时显示无依据提示，保证严谨性</p>
+          <p>产品仅作为缩小版 ToB AI知识库问答系统，基本逻辑包括知识库建设链路闭环、权限隔离、引用回答等核心功能</p>
         </section>
       </div>
+
+      <section class="work-block">
+        <h3>关键决策</h3>
+        <p class="work-note">先SQLite+BM25+本地ollama+qwen2.5本地逻辑跑通，不绑定商业向量库，后续再部署云端及升级技术架构</p>
+        <p class="work-note">文档切块逻辑与Topk选择要从语义级别定义，减少命中丢失概率</p>
+        <p class="work-note">MVP先不做管理员的文档切块设置，缩小测试与任务量</p>
+        
+        <ol class="decision-list">
+          <li>
+            <strong>无出处回答逻辑</strong>
+            <span>分成三类：有可靠命中带引用；主题相关但无可靠原文 → 一般性回答 +「非制度依据」；完全无关 → 短答并引导改问知识库主题。`refused` 表示没有企业引用，不是不说话。</span>
+          </li>
+          <li>
+            <strong>弱命中不挂假引用</strong>
+            <span>分数够才抢救成抽取式 grounded；否则走 ungrounded，citations 必须为空。</span>
+          </li>
+          <li>
+            <strong>检索用 BM25，不用默认 Embedding</strong>
+            <span>先证明「免费本地可跑通」。口语漏检靠标题锚定和短文档兄弟块，不维护「几点→时间」这类词表。</span>
+          </li>
+          <li>
+            <strong>权限停在知识库级</strong>
+            <span>用户组 → 知识库 `can_read`。MVP 不做单篇文档 ACL；员工默认搜全部有权库，管理员可切单库测检索。</span>
+          </li>
+          <li>
+            <strong>只用自写虚构样本</strong>
+            <span>12 份原创制度 / 安全 / 质量 / 设备文档。不粘贴国标或付费模板，也不冒充真实客户 POC。</span>
+          </li>
+          <li>
+            <strong>未发布的知识不进检索</strong>
+            <span>上传 → 解析分块 → 发布为当前版本后才可问到。草稿与解析失败版本对员工不可见。</span>
+          </li>
+        </ol>
+      </section>
+
+      <div class="work-split">
+        <section>
+          <h3>MVP原型包括</h3>
+          <ul>
+            <li>工号登录、角色隔离；员工进不了管理端</li>
+            <li>知识库文档上传、解析、发布 / 取消发布</li>
+            <li>员工问答：答案依据抽屉、三类无依据策略、会话历史</li>
+            <li>赞踩反馈 API；可选 Ollama 生成，未配也能抽取式演示</li>
+          </ul>
+        </section>
+        <section>
+          <h3>明确没做 / 半截</h3>
+          <ul>
+            <li>创建知识库 API、单篇 ACL、版本浏览页</li>
+            <li>用户组 CRUD、反馈列表、问答统计：多为骨架</li>
+            <li>默认 Embedding / 商业向量库 / 公网 Online Demo</li>
+            <li>多轮对话进 prompt（会话可续，生成仍按本轮检索）</li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="work-block">
+        <h3>怎么验收</h3>
+        <ul class="plain-list">
+          <li>问车间穿戴要求 → grounded，能打开原文</li>
+          <li>问旋转机床能否戴手套 → 应命中禁止类条文，不被 ungrounded 抢走</li>
+          <li>问「1+1」→ 无答案依据，并引导知识库范围</li>
+          <li>草稿未发布 → 员工问不到；发布后可问到</li>
+        </ul>
+      </section>
+
+      <section class="work-block">
+        <h3>局限</h3>
+        <p>虚构企业演示用原型，不是真实客户交付。管理端部分入口仍是骨架；登录页旧文案与「三类无依据」行为尚未完全对齐。产品运行截图与公开仓库待补。</p>
+      </section>
     </article>
   </main>
 
